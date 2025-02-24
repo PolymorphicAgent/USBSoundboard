@@ -1,0 +1,8 @@
+{
+    "cfgToLoadAtStartup": "NONE",
+    "knownConfigs": [
+    ],
+    "loadCfgAtStartup": false,
+    "saveCfgAtShutdown": false,
+    "startMinimized": false
+}

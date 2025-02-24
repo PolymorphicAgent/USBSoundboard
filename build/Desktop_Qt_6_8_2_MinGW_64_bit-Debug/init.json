@@ -1,0 +1,9 @@
+{
+    "cfgToLoadAtStartup": "C:/Users/Peter/Documents/UsbSoundboard/testconfig.json",
+    "knownConfigs": [
+        "C:/Users/Peter/Documents/UsbSoundboard/testconfig.json"
+    ],
+    "loadCfgAtStartup": true,
+    "saveCfgAtShutdown": true,
+    "startMinimized": false
+}

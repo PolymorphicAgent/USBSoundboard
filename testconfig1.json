@@ -1,0 +1,19 @@
+{
+    "inputDeviceDescription": "CABLE Output (VB-Audio Virtual Cable)",
+    "inputVolume": 0,
+    "outputDeviceDescription": "Speakers (Realtek(R) Audio)",
+    "outputVolume": 0,
+    "serialPort": "",
+    "sounds": [
+        "C:/Users/Peter/OneDrive/Music/Soundboard/mp3/bobohobo.mp3",
+        "C:/Users/Peter/OneDrive/Music/Soundboard/mp3/bruh.mp3",
+        "C:/Users/Peter/Music/46474078_digital-beep-grow_by_mellau_preview.mp3",
+        "C:/Users/Peter/OneDrive/Music/Soundboard/mp3/buildupepic.mp3",
+        "C:/Users/Peter/OneDrive/Music/Soundboard/mp3/skillissue.mp3",
+        "",
+        "",
+        "",
+        "",
+        ""
+    ]
+}
