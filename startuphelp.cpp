@@ -19,10 +19,11 @@ StartupHelp::StartupHelp(QWidget *parent)
         "1. Press <b>Win + R</b> to open the Run dialog.<br>"
         "2. Type <i>shell:startup</i> and press Enter.<br>"
         "3. In the folder that opens, right-click and select <i>New → Shortcut</i>.<br>"
-        "4. In the shortcut wizard, browse to or copy/paste the full path to the program's main executable:<br>"
-        "<p><code>" + exePath + "</code></p><br>"
+        "4. In the shortcut wizard, browse to or copy/paste the full path to the program's main executable:"
+        "<p><code>" + exePath + "</code></p>"
+        "<p style='font-size:14px;'>"
         "5. Click <i>Next</i>, then give the shortcut a name and click <i>Finish</i>.<br><br>"
-        "Your soundboard will now start automatically when you log in."
+        "Your Soundboard will now start automatically when you log in."
         "</p>";
 
     // Read-only text box for selectable instructions
