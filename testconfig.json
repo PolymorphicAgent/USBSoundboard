@@ -1,0 +1,19 @@
+{
+    "output1Volume": 89,
+    "output2Volume": 80,
+    "outputDevice1Index": 0,
+    "outputDevice2Index": 2,
+    "serialPort": "\\\\.\\COM4",
+    "sounds": [
+        "C:/Users/Peter/Documents/UsbSoundboard/testsounds/wav/one.wav",
+        "C:/Users/Peter/Documents/UsbSoundboard/testsounds/wav/two.wav",
+        "C:/Users/Peter/Documents/UsbSoundboard/testsounds/wav/three.wav",
+        "C:/Users/Peter/Documents/UsbSoundboard/testsounds/wav/four.wav",
+        "C:/Users/Peter/Documents/UsbSoundboard/testsounds/wav/five.wav",
+        "C:/Users/Peter/Documents/UsbSoundboard/testsounds/wav/six.wav",
+        "C:/Users/Peter/Documents/UsbSoundboard/testsounds/wav/seven.wav",
+        "C:/Users/Peter/Documents/UsbSoundboard/testsounds/wav/eight.wav",
+        "C:/Users/Peter/Documents/UsbSoundboard/testsounds/wav/nine.wav",
+        "C:/Users/Peter/Documents/UsbSoundboard/testsounds/wav/ten.wav"
+    ]
+}
