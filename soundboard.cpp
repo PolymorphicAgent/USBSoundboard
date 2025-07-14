@@ -728,14 +728,12 @@ void Soundboard::saveConfig(bool exit) {
             soundArray.append(file);
         }
 
+        config["GLOBAL_PROGRAM_VERSION"] = GLOBAL_PROGRAM_VERSION;
+
         config["sounds"] = soundArray;
 
         //add the serial port
         config["serialPort"] = portComboBox->currentData().toString();
-
-        // //add the device indices
-        // config["outputDevice1Index"] = output1ComboBox->currentIndex();
-        // config["outputDevice2Index"] = output2ComboBox->currentIndex();
 
         //add the device id's
         config["outputDevice1Id"] = QString::fromUtf8(output1ComboBox->currentData().value<QAudioDevice>().id());
@@ -775,6 +773,39 @@ void Soundboard::loadConfig(bool initial) {
             //check if the file is formatted properly then load all of its data
             if (doc.isObject()) {
                 QJsonObject config = doc.object();
+                //check the program version
+                if(config.contains("GLOBAL_PROGRAM_VERSION")){
+                    if(config["GLOBAL_PROGRAM_VERSION"] != GLOBAL_PROGRAM_VERSION){
+                        //outdated user config
+                        QMessageBox::critical(this, "Error: OutdatedConfigError", "The selected configuration file was created by a different version of this program and cannot be loaded.");
+                        return;
+                    }
+                }
+                else {
+                    if(config.contains("outputDevice1Index") && config.contains("outputDevice2Index")){//refactor the configuration file
+                        //add GLOBAL_PROGRAM_VERSION
+                        config["GLOBAL_PROGRAM_VERSION"] = GLOBAL_PROGRAM_VERSION;
+
+                        //change the device indices to id's
+                        output1ComboBox->setCurrentIndex(config["outputDevice1Index"].toInt());
+                        config["outputDevice1Id"] = QString::fromUtf8(output1ComboBox->currentData().value<QAudioDevice>().id());
+                        config.remove("outputDevice1Index");
+
+                        output2ComboBox->setCurrentIndex(config["outputDevice2Index"].toInt());
+                        config["outputDevice2Id"] = QString::fromUtf8(output2ComboBox->currentData().value<QAudioDevice>().id());
+                        config.remove("outputDevice2Index");
+
+                        //write the file
+                        file.open(QIODevice::WriteOnly);
+                        file.write(QJsonDocument(config).toJson());
+                        file.close();
+                    }
+                    else {
+                        QMessageBox::critical(this, "Error: Missing GLOBAL_PROGRAM_VERSION", "The selected configuration file is missing GLOBAL_PROGRAM_VERSION.");
+                        return;
+                    }
+                }
+
                 //load the sounds
                 if (config.contains("sounds") && config["sounds"].isArray()) {
                     QJsonArray soundArray = config["sounds"].toArray();
@@ -814,20 +845,6 @@ void Soundboard::loadConfig(bool initial) {
                     QMessageBox::critical(this, tr("Error: NoSerialError"), tr("Failed to parse configuration file %1").arg(fileName));
                     return;
                 }
-
-                // //load input and output device index
-                // if(config.contains("outputDevice1Index") && config.contains("outputDevice2Index")){
-                //     int outputDevice1Index = config["outputDevice1Index"].toInt();
-                //     output1ComboBox->setCurrentIndex(outputDevice1Index);
-
-                //     int outputDevice2Index = config["outputDevice2Index"].toInt();
-                //     output2ComboBox->setCurrentIndex(outputDevice2Index);
-                // }
-                // else {
-                //     //alert user of incorrectly formatted configuration
-                //     QMessageBox::critical(this, tr("Error: NoDevInfoError"), tr("Failed to parse configuration file %1").arg(fileName));
-                //     return;
-                // }
 
                 //load input and output device id
                 if(config.contains("outputDevice1Id") && config.contains("outputDevice2Id")){
@@ -897,9 +914,12 @@ void Soundboard::saveInitData() {
     QJsonArray cfgArray;
 
     //append the known configurations
-    for (const QString &cfg : knownConfigurations) {
+    for (const QString &cfg : std::as_const(knownConfigurations)) {
         cfgArray.append(cfg);
     }
+
+    //save program version
+    config["GLOBAL_PROGRAM_VERSION"] = GLOBAL_PROGRAM_VERSION;
 
     //save various info about known configurations
     config["knownConfigs"] = cfgArray;
@@ -983,6 +1003,39 @@ void Soundboard::loadInitData(){
             //alert user of incorrectly formatted configuration
             QMessageBox::critical(this, tr("Error: NoStartupMinimizedError"), tr("Failed to parse configuration file \'init.config\'"));
             err = true;
+        }
+
+        //check the program version
+        if(initConfig.contains("GLOBAL_PROGRAM_VERSION") && initConfig["GLOBAL_PROGRAM_VERSION"] != GLOBAL_PROGRAM_VERSION){
+            //update the program version
+            initConfig["GLOBAL_PROGRAM_VERSION"] = GLOBAL_PROGRAM_VERSION;
+
+            //write the file
+            initFile.open(QIODevice::WriteOnly);
+            initFile.write(QJsonDocument(initConfig).toJson());
+            initFile.close();
+
+            //welcome the user to the new program version
+            QMessageBox::information(this, tr("Post-Update Welcome"), tr("Welcome to version %1 of the USB Soundboard User App!\nThis update fixes the bug where your audio output devices would randomly switch around, and introduces small optimizations.\nEnjoy!").arg(GLOBAL_PROGRAM_VERSION));
+        }
+        else if(!initConfig.contains("GLOBAL_PROGRAM_VERSION")){
+            if(!err) {
+                //update the program version
+                initConfig["GLOBAL_PROGRAM_VERSION"] = GLOBAL_PROGRAM_VERSION;
+
+                //write the file
+                initFile.open(QIODevice::WriteOnly);
+                initFile.write(QJsonDocument(initConfig).toJson());
+                initFile.close();
+
+                //welcome the user to the new program version
+                QMessageBox::information(this, tr("Post-Update Welcome"), tr("Welcome to version %1 of the USB Soundboard User App!\nThis update fixes the bug where your audio output devices would randomly switch around, and introduces small optimizations.\nEnjoy!").arg(GLOBAL_PROGRAM_VERSION));
+            }
+            else{
+                QMessageBox::warning(this, "Warn: NoPgmVersion", "Initialization Configuration is missing GLOBAL_PROGRAM_VERSION!");
+                err = true;
+            }
+
         }
     }
     else{
@@ -1093,6 +1146,8 @@ void Soundboard::startupConfigSelected(const QString& cfg){
 
     if(choice == QMessageBox::Yes){
         loadConfig(true);
+        output1VolumeSlider->setValue(output1Volume);
+        output2VolumeSlider->setValue(output2Volume);
     }
 }
 

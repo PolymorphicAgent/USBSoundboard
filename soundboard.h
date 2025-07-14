@@ -40,6 +40,8 @@
 #include <QStandardPaths>
 #endif
 
+constexpr char GLOBAL_PROGRAM_VERSION[] = "1.0.1";
+
 class Soundboard : public QMainWindow
 {
     Q_OBJECT
