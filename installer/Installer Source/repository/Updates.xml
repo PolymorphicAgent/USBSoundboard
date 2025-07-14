@@ -1,0 +1,18 @@
+<Updates>
+ <ApplicationName>{AnyApplication}</ApplicationName>
+ <ApplicationVersion>1.0.0</ApplicationVersion>
+ <Checksum>true</Checksum>
+ <PackageUpdate>
+  <Name>me.polymorphicagent.usbsoundboard</Name>
+  <DisplayName>Main Program</DisplayName>
+  <Description>Installs Usb Soundboard.</Description>
+  <Version>1.0.1</Version>
+  <ReleaseDate>2025-07-14</ReleaseDate>
+  <Default>true</Default>
+  <UpdateFile CompressedSize="27088892" OS="Any" UncompressedSize="92891923"/>
+  <DownloadableArchives>generic.7z,iconengines.7z,imageformats.7z,multimedia.7z,networkinformation.7z,platforms.7z,styles.7z,tls.7z,translations.7z,content.7z</DownloadableArchives>
+  <SHA1>ec34854b0062ba688c26c49650745ac3caf580eb</SHA1>
+ </PackageUpdate>
+ <SHA1>f0a0738809a7ebae22e985e72b08bd5a2ba21c71</SHA1>
+ <MetadataName>2025-07-14-1444_meta.7z</MetadataName>
+</Updates>
