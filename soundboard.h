@@ -91,6 +91,7 @@ private:
     QString serialData, oldSerialData, s1, s2;
     QString cfgToLoadAtStartup, loadedConfig;
     QList<QMediaPlayer*> device1MediaPlayers, device2MediaPlayers;
+    QList<QAudioDevice> outputDevices;
     QSerialPort::SerialPortError serialError = QSerialPort::SerialPortError::NoError;
     QSerialPort *serial;
     QComboBox *portComboBox;
@@ -113,6 +114,7 @@ private:
     bool configChanged();
     qsizetype index(const QString&, QStringList);
     QAction* index(const QString& , QList<QAction*>);
+    int index(QByteArray);
     void updateKnownConfigsMenu();
     float scale(int);
 signals:

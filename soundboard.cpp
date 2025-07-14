@@ -733,9 +733,13 @@ void Soundboard::saveConfig(bool exit) {
         //add the serial port
         config["serialPort"] = portComboBox->currentData().toString();
 
-        //add the device descriptions
-        config["outputDevice1Index"] = output1ComboBox->currentIndex();
-        config["outputDevice2Index"] = output2ComboBox->currentIndex();
+        // //add the device indices
+        // config["outputDevice1Index"] = output1ComboBox->currentIndex();
+        // config["outputDevice2Index"] = output2ComboBox->currentIndex();
+
+        //add the device id's
+        config["outputDevice1Id"] = QString::fromUtf8(output1ComboBox->currentData().value<QAudioDevice>().id());
+        config["outputDevice2Id"] = QString::fromUtf8(output2ComboBox->currentData().value<QAudioDevice>().id());
 
         //add the input and output volumes
         config["output1Volume"] = output1Volume;
@@ -811,17 +815,33 @@ void Soundboard::loadConfig(bool initial) {
                     return;
                 }
 
-                //load input and output device information
-                if(config.contains("outputDevice1Index") && config.contains("outputDevice2Index")){
-                    int outputDevice1Index = config["outputDevice1Index"].toInt();
-                    output1ComboBox->setCurrentIndex(outputDevice1Index);
+                // //load input and output device index
+                // if(config.contains("outputDevice1Index") && config.contains("outputDevice2Index")){
+                //     int outputDevice1Index = config["outputDevice1Index"].toInt();
+                //     output1ComboBox->setCurrentIndex(outputDevice1Index);
 
-                    int outputDevice2Index = config["outputDevice2Index"].toInt();
-                    output2ComboBox->setCurrentIndex(outputDevice2Index);
+                //     int outputDevice2Index = config["outputDevice2Index"].toInt();
+                //     output2ComboBox->setCurrentIndex(outputDevice2Index);
+                // }
+                // else {
+                //     //alert user of incorrectly formatted configuration
+                //     QMessageBox::critical(this, tr("Error: NoDevInfoError"), tr("Failed to parse configuration file %1").arg(fileName));
+                //     return;
+                // }
+
+                //load input and output device id
+                if(config.contains("outputDevice1Id") && config.contains("outputDevice2Id")){
+                    QByteArray outputDevice1Id = config["outputDevice1Id"].toString().toUtf8();
+                    output1Index = index(outputDevice1Id);
+                    output1ComboBox->setCurrentIndex(output1Index);
+
+                    QByteArray outputDevice2Id = config["outputDevice2Id"].toString().toUtf8();
+                    output2Index = index(outputDevice2Id);
+                    output2ComboBox->setCurrentIndex(output2Index);
                 }
                 else {
                     //alert user of incorrectly formatted configuration
-                    QMessageBox::critical(this, tr("Error: NoDevInfoError"), tr("Failed to parse configuration file %1").arg(fileName));
+                    QMessageBox::critical(this, tr("Error: NoDevIdError"), tr("Failed to parse configuration file %1").arg(fileName));
                     return;
                 }
 
@@ -1177,14 +1197,11 @@ void Soundboard::populateAudioDevices() {
     output2ComboBox->clear();
 
     //list available output devices
-    const auto outputDevices = QMediaDevices::audioOutputs();
+    outputDevices = QMediaDevices::audioOutputs();
     for (const auto &device : outputDevices) {
-        output1ComboBox->addItem(device.description());
-    }
-
-    //list available output devices
-    for (const auto &device : outputDevices) {
-        output2ComboBox->addItem(device.description());
+        QVariant variant = QVariant::fromValue(device);
+        output1ComboBox->addItem(device.description(), variant);
+        output2ComboBox->addItem(device.description(), variant);
     }
 
     //set the selected devices as the current combo box indices
@@ -1263,4 +1280,15 @@ void Soundboard::combo2Changed(int newIndex) {
 void Soundboard::openStartupHelp(){
     startupHelpBox = new StartupHelp(this);
     startupHelpBox->exec();
+}
+
+int Soundboard::index(QByteArray deviceId){
+    for (int i = 0; i < outputDevices.count(); ++i) {
+        QAudioDevice device = outputDevices[i];
+        if (device.id() == deviceId) {
+            return i;
+            break;
+        }
+    }
+    return 0;
 }

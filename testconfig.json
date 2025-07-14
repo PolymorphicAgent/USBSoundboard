@@ -1,9 +1,9 @@
 {
-    "output1Volume": 89,
-    "output2Volume": 80,
-    "outputDevice1Index": 0,
-    "outputDevice2Index": 2,
-    "serialPort": "\\\\.\\COM4",
+    "output1Volume": 44,
+    "output2Volume": 53,
+    "outputDevice1Id": "{0.0.0.00000000}.{1bcabdf1-5a61-4602-94e6-0e4bdb605710}",
+    "outputDevice2Id": "{0.0.0.00000000}.{3d16de40-efc2-4c78-8260-eb82768261ce}",
+    "serialPort": "\\\\.\\COM6",
     "sounds": [
         "C:/Users/Peter/Documents/UsbSoundboard/testsounds/wav/one.wav",
         "C:/Users/Peter/Documents/UsbSoundboard/testsounds/wav/two.wav",
