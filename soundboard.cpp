@@ -909,7 +909,7 @@ void Soundboard::loadConfig(bool initial) {
 //save initialization data
 void Soundboard::saveInitData() {
     //initialize the file object
-    QString fileName = "init.json";
+    QString fileName = QCoreApplication::applicationDirPath()+"/init.json";
     QJsonObject config;
     QJsonArray cfgArray;
 

@@ -1,0 +1,3 @@
+https://doc.qt.io/qtinstallerframework/ifw-tutorial.html
+https://doc.qt.io/qtinstallerframework/ifw-updates.html
+https://doc.qt.io/qtinstallerframework/ifw-online-installers.html

@@ -1,0 +1,9 @@
+{
+    "GLOBAL_PROGRAM_VERSION": "1.0.1",
+    "cfgToLoadAtStartup": "NONE",
+    "knownConfigs": [
+    ],
+    "loadCfgAtStartup": false,
+    "saveCfgAtShutdown": false,
+    "startMinimized": false
+}

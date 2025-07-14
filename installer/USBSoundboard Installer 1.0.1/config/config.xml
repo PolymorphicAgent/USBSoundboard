@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Installer>
+    <Name>Usb Soundboard</Name>
+    <Version>1.0.1</Version>
+    <Title> Usb Soundboard Installer</Title>
+    <Publisher>Polymorphic Agent</Publisher>
+    <TargetDir>@HomeDir@/AppData/Roaming/PolymorphicAgent/UsbSoundboard</TargetDir>
+    <InstallerWindowIcon>logo.png</InstallerWindowIcon>
+    <InstallerApplicationIcon>icon.ico</InstallerApplicationIcon>
+    <RunProgram>@TargetDir@/UsbSoundboard.exe</RunProgram>
+    <RunProgramDescription>Start the Soundboard User App!</RunProgramDescription>
+    <StartMenuDir>Usb Soundboard App</StartMenuDir>
+    <MaintenanceToolName>MaintenanceTool</MaintenanceToolName>
+    <AllowNonAsciiCharacters>true</AllowNonAsciiCharacters>
+    <StyleSheet>style.qss</StyleSheet>
+
+    <RemoteRepositories>
+        <Repository>
+                <Url>https://repo.polimorph.dev/USBSoundboard/</Url>
+                <Enabled>1</Enabled>
+                <DisplayName>PolymorphicAgent's Repository</DisplayName>
+        </Repository>
+    </RemoteRepositories>
+</Installer>
