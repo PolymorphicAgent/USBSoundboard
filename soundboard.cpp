@@ -373,7 +373,11 @@ void Soundboard::disconnectSerialPort(bool error, bool popup){
         if(serial->isOpen())serial->close();
         connectionStatusIconWrapper->setPixmap(connectionStatusIcon_ERR_->pixmap(16,16));
         connectionStatusIconWrapper->setToolTip(tr("Disconnected from serial port."));
-        QMessageBox::critical(this, tr("Error"), tr("Disconnected from serial port.\nError: %1").arg(toString(serialError)));
+        QMessageBox::Button choice = QMessageBox::critical(this, tr("Error"), tr("Disconnected from serial port.\nError: %1").arg(toString(serialError)), QMessageBox::Ok | QMessageBox::Retry);
+        if(choice == QMessageBox::Retry){
+            //retry the serial port connection
+            connectToSerialPort(true);
+        }
     }
     else if(!error && popup){
         if(serial->isOpen())serial->close();
