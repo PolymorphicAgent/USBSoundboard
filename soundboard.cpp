@@ -127,12 +127,21 @@ Soundboard::Soundboard(QWidget *parent)
     connect(sbWidget, &SoundboardWidget::buttonRightClicked, this, &Soundboard::selectSound);
     connect(sbWidget, &SoundboardWidget::buttonPressed,      this, &Soundboard::playSound);
 
+    QHBoxLayout *helpLayout = new QHBoxLayout(this);
+
     //device selection and volume sliders
     //output device 1 selection
     output1ComboBox = new QComboBox(this);
     QLabel *l1 = new QLabel(tr("Select Output One"), this);
     l1->setToolTip("Sound effects will be sent to this device");
-    mainLayout->addWidget(l1);
+    helpLayout->addWidget(l1);
+
+    //output device help label
+    outputHelpLabel = new QLabel(tr("<i><u>Why are there two outputs? (hover)</u></i>"), this);
+    outputHelpLabel->setToolTip("Sounds will be sent to both output devices simultaneously, but why?\nOne output is intended to be routed to your audio mixer application (Like Voicemeeter), to be mixed into your microphone.\nThis allows your friends to hear any triggered sounds when in a voice call.\nThe second output is intended to attach to your headphones, so you can hear the sound effect at the same time as your friends.\nI use a virtual audio cable (VB-AUDIO) with my headphone device configured to \"listen\" to the OUTPUT of the cable,\nand the INPUT of that same cable selected as one of the below outputs.");
+    helpLayout->addWidget(outputHelpLabel);
+
+    mainLayout->addLayout(helpLayout);
     mainLayout->addWidget(output1ComboBox);
 
     //output device 2 selection

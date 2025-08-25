@@ -104,7 +104,7 @@ private:
     QMenu *trayMenu, *startupConfigMenu;
     QComboBox *output1ComboBox, *output2ComboBox;
     QSlider *output1VolumeSlider, *output2VolumeSlider;
-    QLabel *output1VolumeValueLabel, *output2VolumeValueLabel;
+    QLabel *output1VolumeValueLabel, *output2VolumeValueLabel, *outputHelpLabel;
     const int currentBaudRate = 115200;
     bool loadCfgAtStartup;
     bool saveCfgAtShutdown;
