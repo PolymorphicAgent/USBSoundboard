@@ -1,3 +1,16 @@
 https://doc.qt.io/qtinstallerframework/ifw-tutorial.html
 https://doc.qt.io/qtinstallerframework/ifw-updates.html
 https://doc.qt.io/qtinstallerframework/ifw-online-installers.html
+
+creation commands:
+update the version in the 2 config files
+
+repogen -p packages repository
+
+
+binarycreator --online-only -p packages -c config/config.xml USBSoundboardInstaller.exe
+
+copy the repo to the webserver
+
+yipppe
+

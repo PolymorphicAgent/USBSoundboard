@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Installer>
     <Name>Usb Soundboard</Name>
-    <Version>1.0.1</Version>
+    <Version>1.0.2</Version>
     <Title> Usb Soundboard Installer</Title>
     <Publisher>Polymorphic Agent</Publisher>
     <TargetDir>@HomeDir@/AppData/Roaming/PolymorphicAgent/UsbSoundboard</TargetDir>
