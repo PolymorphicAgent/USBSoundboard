@@ -1,6 +1,8 @@
 # USBSoundboard
 A user-friendly software that communicates with my custom soundboard!
 
+See full documentation for this project here: [https://docs.polimorph.dev/projects/hw/usbsoundboard/](https://docs.polimorph.dev/projects/hw/usbsoundboard/)
+
 ![Soundboard](https://raw.githubusercontent.com/PolymorphicAgent/USBSoundboard/refs/heads/main/images/software.png)
 
 The Adruino sketch is under the directory 'Arduino Firmware'
