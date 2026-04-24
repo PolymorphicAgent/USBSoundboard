@@ -2,6 +2,16 @@ https://doc.qt.io/qtinstallerframework/ifw-tutorial.html
 https://doc.qt.io/qtinstallerframework/ifw-updates.html
 https://doc.qt.io/qtinstallerframework/ifw-online-installers.html
 
+for creating a start menu shortcut
+https://doc.qt.io/qtinstallerframework/qtinstallerframework-startmenu-example.html
+https://doc.qt.io/qtinstallerframework/qtinstallerframework-startmenu-packages-org-qtproject-ifw-example-meta-installscript-qs.html
+
+for creating a desktop shortcut
+https://doc.qt.io/qtinstallerframework/ifw-customizing-installers.html
+https://doc.qt.io/qtinstallerframework/scripting-installer.html#addWizardPageItem-method
+https://doc.qt.io/qtinstallerframework/noninteractive.html
+https://stackoverflow.com/questions/21956108/qt-installer-framework-create-shortcut-on-the-desktop
+
 creation commands:
 update the version in the 2 config files
 
